@@ -1,6 +1,15 @@
 import {motion} from "framer-motion";
+import { useState } from "react";
+import fires from "./png/y8.gif"
 import "./index.css";
-const context = () => {
+const Context = () => {
+   const [isHovering,setIsHovering] = useState(null)
+   const handleMouseEnter = () =>{
+    setIsHovering(true);
+   }
+   const handleMouseExit = () => {
+    setIsHovering(false);
+   }
     return (
       <div className=" w-full p-5 flex justify-center mt-20">
         <div className=" w-auto p-10 ">
@@ -13,36 +22,49 @@ const context = () => {
                 duration: 0.5,
               }}
             >
+              {isHovering ? (
+                <motion.img className="w-[70px] absolute ml-[137px] mt-[45px]" src={fires} />
+              ) : (
+                ""
+              )}
               What I'm about to say is
             </motion.h1>
             <motion.p
-            className="text-xl"
+              className="text-xl"
               initial={{ opacity: 0 }}
               whileInView={{ y: [200, 0], opacity: 1 }}
               transition={{
                 duration: 0.7,
               }}
             >
-              Now the {}
-              <span className="font-bold text-orange-700 text-[40px]">
-                fire
-              </span> 
-              {} in me is awakened the desired to learn more about web
-              development is flaming hot. Im hungry to learn because creating a
-              system here is very different I know its hard but its enjoyable.
-              Theres so much to learn but Im taking my time and enjoying the
-              process.
+              <div className="mt-10">
+                <p>
+                  Now The {}
+                  <i
+                    className="font-bold text-orange-700 text-[40px]"
+                    onMouseEnter={handleMouseEnter}
+                    onMouseLeave={handleMouseExit}
+                  >
+                    Fire
+                  </i>
+                  {} in me is awakened the desired to learn more about web
+                  development is flaming hot. Im hungry to learn because
+                  creating a system here is very different I know its hard but
+                  its enjoyable. Theres so much to learn but Im taking my time
+                  and enjoying the process.
+                </p>
+              </div>
             </motion.p>
             <motion.p
-            className="mt-5 font-semibold text-lg"
+              className="mt-5 font-semibold text-lg"
               whileInView={{ y: [-10, 10] }}
               transition={{
-                repeat:Infinity,
-                repeatType:"reverse",
-                duration: .7,
-            }}
+                repeat: Infinity,
+                repeatType: "reverse",
+                duration: 0.7,
+              }}
             >
-                Whut!?
+              Whut!?
             </motion.p>
           </div>
         </div>
@@ -50,4 +72,4 @@ const context = () => {
     );
 }
  
-export default context;
+export default Context;
